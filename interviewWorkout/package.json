@@ -1,0 +1,22 @@
+{
+  "name": "interviewworkout",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gxvigo/InterviewTrainer.git"
+  },
+  "author": "Giovanni Vigorelli",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gxvigo/InterviewTrainer/issues"
+  },
+  "homepage": "https://github.com/gxvigo/InterviewTrainer#readme",
+  "dependencies": {
+    "aws-sdk": "^2.393.0"
+  }
+}
