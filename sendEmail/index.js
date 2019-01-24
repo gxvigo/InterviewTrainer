@@ -13,6 +13,7 @@ exports.handler = function (event, context, callback) {
     //     <img src="https://media.licdn.com/dms/image/C4E03AQFQy8Gv5CIE1w/profile-displayphoto-shrink_200_200/0?e=1553126400&v=beta&t=z1dFcaQbFwKzzBAeseLDVp2wp3LHs1YzVs3BSsaU1aA">
     // `
 
+    // complete email must be sent base64 encoded
     var myEmail = Buffer.from(event.html, 'base64').toString('ascii');
     // var myEmail = event.html;
 

@@ -1,15 +1,17 @@
 var aws = require('aws-sdk');
 var lambda = new aws.Lambda({
-  region: 'us-east-1' 
+  region: 'us-east-1'
 });
 
 
-exports.handler = function(event, context) {
-  
+exports.handler = function (event, context) {
+
   console.log('### interviewWorkout');
 
+  var interviewData = {};
 
-  //// Get interview question
+
+  //// Get interview person
   var params = {
     FunctionName: 'queryAwsPeople', // the lambda function we are going to invoke
     InvocationType: 'RequestResponse',
@@ -17,18 +19,20 @@ exports.handler = function(event, context) {
     Payload: '{}'
   };
 
-  lambda.invoke(params, function(err, data) {
+  lambda.invoke(params, function (err, data) {
     if (err) {
-      console.log('### interviewWorkout - completed. invoked function queryAwsPeople failed. Error: '+err);
+      console.log('### interviewWorkout - completed. invoked function queryAwsPeople failed. Error: ' + err);
       context.fail(err);
     } else {
-      console.log('### interviewWorkout - completed. Data from invoked function queryAwsPeople: '+ data.Payload);
-    //   context.succeed('### interviewWorkout - completed. Data from invoked function queryAwsPeople: '+ data.Payload);
+      console.log('### interviewWorkout - completed. Data from invoked function queryAwsPeople: ' + data.Payload);
+      interviewData.person = JSON.parse(data.Payload);
+      console.log("### interviewData: " + JSON.stringify(interviewData));
+      //   context.succeed('### interviewWorkout - completed. Data from invoked function queryAwsPeople: '+ data.Payload);
     }
   })
 
 
-  //// Get interview person
+  //// Get interview question
   var params = {
     FunctionName: 'queryQuestions', // the lambda function we are going to invoke
     InvocationType: 'RequestResponse',
@@ -36,26 +40,35 @@ exports.handler = function(event, context) {
     Payload: '{}'
   };
 
-  lambda.invoke(params, function(err, data) {
+  lambda.invoke(params, function (err, data) {
     if (err) {
-      console.log('### interviewWorkout - completed. invoked function queryAwsPeople failed. Error: '+err);
+      console.log('### interviewWorkout - completed. invoked function queryAwsPeople failed. Error: ' + err);
       context.fail(err);
     } else {
-      console.log('### interviewWorkout - completed. Data from invoked function queryQuestions: '+ data.Payload);
-    //   context.succeed('### interviewWorkout - completed. Data from invoked function queryAwsPeople: '+ data.Payload);
+      console.log('### interviewWorkout - completed. Data from invoked function queryQuestions: ' + data.Payload);
+      interviewData.question = JSON.parse(data.Payload);
+      console.log("### interviewData: " + JSON.stringify(interviewData));
+      //   context.succeed('### interviewWorkout - completed. Data from invoked function queryAwsPeople: '+ data.Payload);
     }
   })
 
 
 
   //// Send email
+
+  console.log("### interviewData: " + JSON.stringify(interviewData));
+
   var emailH = `
-        <h1>This text should be large, because it is formatted as a header in HTML.</h1>
-        <p>Here is a formatted link: <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html">Amazon Simple Email Service Developer Guide</a>.</p>
-        <img src="https://media.licdn.com/dms/image/C4E03AQFQy8Gv5CIE1w/profile-displayphoto-shrink_200_200/0?e=1553126400&v=beta&t=z1dFcaQbFwKzzBAeseLDVp2wp3LHs1YzVs3BSsaU1aA">
-    `
+  <p style="font-size: 24px;">Do you want the <span style="background-color: #000000; color: #ff9900;">job</span>? .. I I gotta keep you on your toes</p>
+  <p>&nbsp;</p>
+  <p><img src="https://s3.amazonaws.com/peoplephotos/aws/scottGillet.png" />&nbsp; <span style="font-size: 18px;"><strong>Scott Gillet</strong></span></p>
+  <p>Regional Account Manager in New Zealand - Auckland wants to know:</p>
+  <p>&nbsp;<span style="text-decoration: underline; font-size: 18px;">"When you are working with a large number of customers, it&rsquo;s tricky to deliver excellent service to them all. How do you go about prioritizing your customers"</span></p>
+  `
+
+
   var emailbodyE = Buffer.from(emailH).toString('base64');
-  
+
   var emailbody = '{"html": "' + emailbodyE + '"}';
   var params = {
     FunctionName: 'sendEmail', // the lambda function we are going to invoke
@@ -64,17 +77,15 @@ exports.handler = function(event, context) {
     Payload: emailbody
   };
 
-  lambda.invoke(params, function(err, data) {
+  lambda.invoke(params, function (err, data) {
     if (err) {
-      console.log('### interviewWorkout - completed. invoked function sendEmail failed. Error: '+err);
+      console.log('### interviewWorkout - completed. invoked function sendEmail failed. Error: ' + err);
       context.fail(err);
     } else {
-      console.log('### interviewWorkout - completed. Data from invoked function sendEmail: '+ data.Payload);
-    //   context.succeed('### interviewWorkout - completed. Data from invoked function queryAwsPeople: '+ data.Payload);
+      console.log('### interviewWorkout - completed. Data from invoked function sendEmail: ' + data.Payload);
+      //   context.succeed('### interviewWorkout - completed. Data from invoked function queryAwsPeople: '+ data.Payload);
     }
   })
-  
+
 
 };
-
-  

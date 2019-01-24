@@ -6,6 +6,8 @@ AWS.config.update({
 });
 var attr = require('dynamodb-data-types').AttributeValue;
 
+var configParm = require('./config.json'); // configuration file
+
 
 exports.handler = (event, context, callback) => {
 
@@ -16,11 +18,16 @@ exports.handler = (event, context, callback) => {
     apiVersion: '2012-10-08'
   });
 
+  // Get interview person
+  var qIds = parseInt(configParm.tableRecords); // total number (+1) of records in the AwsPeoeple table in DynamoDB
+  var qId = String(Math.floor(Math.random() * Math.floor(qIds))); // random record id (index) from AwsPeoeple table in DynamoDB
+
+
   var params = {
     TableName: 'questions',
     Key: {
       "id": {
-        S: "0"
+        S: qId
       }
     }
     //ProjectionExpression: 'ATTRIBUTE_NAME'
@@ -31,8 +38,9 @@ exports.handler = (event, context, callback) => {
     if (err) {
       console.log("Error", err);
     } else {
-      console.log("Success", data.Item);
-      context.succeed(data.Item);
+      // unwrap: unmarshall data back to the orignal
+      console.log("Success", attr.unwrap(data.Item));
+      context.succeed(attr.unwrap(data.Item));
     }
   });
 
