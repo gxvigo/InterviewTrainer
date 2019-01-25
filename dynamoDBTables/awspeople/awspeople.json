@@ -1,0 +1,75 @@
+{
+  "awspeople": [{
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "0"
+          },
+          "location": {
+            "S": "New Zealand - Auckland"
+          },
+          "name": {
+            "S": "Scott Gillet"
+          },
+          "notes": {
+            "S": "NA"
+          },
+          "photo": {
+            "S": "https://s3.amazonaws.com/peoplephotos/aws/scottGillet.png"
+          },
+          "role": {
+            "S": "Regional Account Manager"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "1"
+          },
+          "location": {
+            "S": "Australia - Brisbane"
+          },
+          "name": {
+            "S": "Troy Kirkland"
+          },
+          "notes": {
+            "S": "NA"
+          },
+          "photo": {
+            "S": "https://s3.amazonaws.com/peoplephotos/aws/troyKirkland.png"
+          },
+          "role": {
+            "S": "Solution Architect Manager"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "2"
+          },
+          "location": {
+            "S": "Wellington, New Zealand"
+          },
+          "name": {
+            "S": "Johnathon Meichtry"
+          },
+          "notes": {
+            "S": "NA"
+          },
+          "photo": {
+            "S": "https://s3.amazonaws.com/peoplephotos/aws/johnathonMeichtry.jpg"
+          },
+          "role": {
+            "S": "Principal Solutions Architect"
+          }
+        }
+      }
+    }
+  ]
+}

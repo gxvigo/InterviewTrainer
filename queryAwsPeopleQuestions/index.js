@@ -86,7 +86,7 @@ exports.handler = (event, context, callback) => {
 
   // get random index for awspeople
   var pIds = parseInt(configParm.awsPeopleTotalRecords); // total number (+1) of records in the AwsPeoeple table in DynamoDB
-  var pId = String(Math.floor(Math.random() * Math.floor(qIds))); // random record id (index) from AwsPeoeple table in DynamoDB
+  var pId = String(Math.floor(Math.random() * Math.floor(pIds))); // random record id (index) from AwsPeoeple table in DynamoDB
 
 
   queryTable(qId, pId)

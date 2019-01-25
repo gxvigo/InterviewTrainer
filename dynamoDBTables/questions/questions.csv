@@ -1,0 +1,4 @@
+id (S),question (S),tags (L)
+0,Tell the story of the last time you had to apologize to someone,"[  { ""S"" : ""customerObsession"" }]"
+1,"When you are working with a large number of customers, it istricky to deliver excellent service to them all. How do you go about prioritizing your customers needs?","[  { ""S"" : ""customerObsession"" }]"
+2,What are the most productive use cases for Cloud?,[]
