@@ -19,7 +19,7 @@ exports.handler = function (event, context, callback) {
 
     var mailOptions = {
         from: "gxvigo@gmail.com",
-        subject: "This is an email sent from a Lambda function!",
+        subject: "AWS flashcard... on your toes! ",
         // html: `<p>You got a contact message from: <b>${event.emailAddress}</b></p>`,
         // html: `<p>You got a contact message from: <h1>giovanni</h1></p>`,
         html: myEmail,
